@@ -3,8 +3,12 @@ name: Build and Push Docker Images
 on: 
   push:
     branches:
-      -main 
+      - main 
 
 jobs:
+  build:
+    runs-on: ubuntu-latest
+
   steps:
-    echo: "Hello nilesh"
+    - name: Print Message
+      run: echo "Hellp Nilesh"  
