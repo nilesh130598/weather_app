@@ -12,3 +12,43 @@ jobs:
     steps:
       - name: Print Message
         run: echo "Hello Nilesh"
+
+  docker: 
+    runs-on: ubuntu-latest
+    
+    steps: 
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with: 
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build frontend image
+        run: |
+          docker build \
+           -t ${{ secrets.DOCKER_USERNAME }}/frontend_weather:latest \
+           -t ${{ secrets.DOCKER_USERNAME }}/frontend_weather:${{ github.sha }} \
+           ./Frontend_app
+
+      - name: push frontend image
+        run: | 
+          docker push ${{ secrets.DOCKER_USERNAME }}/frontend_weather:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/frontend_weather:${{ github.sha }}     
+
+      - name: Build backend image
+        run: | 
+          docker build \ 
+           -t ${{ secrets.DOCKER_USERNAME }}/backend_weather:latest \
+           -t ${{ secrets.DOCKER_USERNAME }}/backend_weather:${{ github.sha }} \
+          ./backend_app
+
+      - name: push backend image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/backend_weather:latest \
+          docker push ${{ secrets.DOCKER_USERNAME }}/backend_weather:${{ github.sha}}
