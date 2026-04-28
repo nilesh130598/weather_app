@@ -43,13 +43,13 @@ jobs:
            ./Frontend_app
 
       - name: push frontend image
-        run: | 
+        run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend_weather:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend_weather:${{ github.sha }}     
 
       - name: Build backend image
         run: |
-          docker build \ 
+          docker build \
            -t ${{ secrets.DOCKER_USERNAME }}/backend_weather:latest \
            -t ${{ secrets.DOCKER_USERNAME }}/backend_weather:${{ github.sha }} \
           ./backend_app
