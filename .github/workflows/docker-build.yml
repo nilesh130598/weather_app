@@ -48,7 +48,7 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/frontend_weather:${{ github.sha }}     
 
       - name: Build backend image
-        run: | 
+        run: |
           docker build \ 
            -t ${{ secrets.DOCKER_USERNAME }}/backend_weather:latest \
            -t ${{ secrets.DOCKER_USERNAME }}/backend_weather:${{ github.sha }} \
