@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: nilesh9168/frontend-weather:latest
+        image: nilesh9168/frontend_weather:latest
         imagePullPolicy: Always
 
         ports:
