@@ -63,6 +63,12 @@ jobs:
     runs-on: self-hosted
     
     steps: 
+      - name: verify files
+        run: |
+          pwd
+          ls -la
+          ls -la k8s
+
       - name: Deploy manifests
         run: kubectl apply -f k8s/
 
