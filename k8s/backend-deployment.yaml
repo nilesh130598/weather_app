@@ -10,7 +10,7 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
-      mmaxUnavailable: 0
+      maxUnavailable: 0
 
   selector:
     matchLabels:
