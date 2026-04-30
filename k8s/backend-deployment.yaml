@@ -10,10 +10,10 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
-      maxunavailable: 0
+      mmaxUnavailable: 0
 
   selector:
-    matchLables:
+    matchLabels:
       app: backend
 
   template:
