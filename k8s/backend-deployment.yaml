@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: weather-app
+spec: 
+  replicas: 2
+
+  strategy: 
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxunavailable: 0
+
+  selector:
+    matchLables:
+      app: backend
+
+  template:
+    metadata:
+      labels: 
+        app: backend    
+
+    spec: 
+      containers:
+      - name: backend
+        image: nilesh9168/backend-weather:latest
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 5000
+
+        env:
+        - name: PORT
+          value: "5000"
+
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "512Mi"    
