@@ -63,6 +63,9 @@ jobs:
     runs-on: self-hosted
     
     steps: 
+      - name: Checkout source code
+        uses: actions/checkout@v4    
+          
       - name: verify files
         run: |
           pwd
