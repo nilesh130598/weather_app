@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: weather-ingress
   namespace: weather-app
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec: 
     ingressClassName: nginx
 
@@ -17,3 +19,13 @@ spec:
               name: frontend-service
               port:
                 number: 80
+
+      https:
+        paths:
+        - path: /
+          pathType: prefix
+          backend:
+            service:
+              name: frontend-service
+              port:
+                number: 443        
